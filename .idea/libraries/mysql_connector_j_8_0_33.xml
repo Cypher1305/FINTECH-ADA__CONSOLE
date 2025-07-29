@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="mysql-connector-j-8.0.33">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../ada/fintech-ada/fintech-ada/mysql-connector-j-8.0.33.jar!/" />
+      <root url="jar://$USER_HOME$/Téléchargements/mysql-connector-j-8.0.33.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -75,14 +75,15 @@ public class Main {
         System.out.print("Username: ");
         String username = scanner.nextLine();
 
-        System.out.print("Password: ");
-        String password = scanner.nextLine();
+        System.out.print("Nom: ");
+        String lastname = scanner.nextLine();
 
         System.out.print("Prénom: ");
         String firstname = scanner.nextLine();
 
-        System.out.print("Nom: ");
-        String lastname = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+
 
         System.out.print("Email: ");
         String email = scanner.nextLine();

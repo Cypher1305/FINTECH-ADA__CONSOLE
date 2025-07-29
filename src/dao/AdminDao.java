@@ -4,12 +4,12 @@ import database.DatabaseConnection;
 import enums.UserType;
 import models.Admin;
 import models.UserAccount;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import utils.Utils;
 
-public class AdminDao {
+import java.sql.*;
+import java.util.*;
+
+public class AdminDao { ;
     private Connection connection;
     private UserAccountDao userAccountDao;
 
@@ -29,7 +29,7 @@ public class AdminDao {
             }
 
             // 2. Créer l'utilisateur
-            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type, matricule) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = connection.prepareStatement(userSql, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, admin.getFirstname());
                 pstmt.setString(2, admin.getLastname());
@@ -37,6 +37,7 @@ public class AdminDao {
                 pstmt.setString(4, admin.getPhoneNumber());
                 pstmt.setInt(5, admin.getUserAccount().getId());
                 pstmt.setString(6, UserType.ADMIN.name());
+                pstmt.setString(7, Utils.generateMatricule(admin.getFirstname(), admin.getLastname()));
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {
