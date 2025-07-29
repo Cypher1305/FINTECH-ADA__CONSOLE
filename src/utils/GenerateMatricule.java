@@ -3,7 +3,7 @@ package utils;
 import java.util.UUID;
 
 
-public class Utils {
+public class GenerateMatricule {
     public static final String MATRICULE_PREFIX = "ada-ch3-2025-";
 
     public static String generateMatricule(String firstname, String lastname) {
