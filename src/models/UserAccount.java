@@ -1,8 +1,10 @@
 package models;
 
+import enums.UserType;
+
 import java.time.LocalDateTime;
 
-public class UserAccount {
+public class UserAccount{
     private int id;
     private String username;
     private String password;
@@ -45,5 +47,22 @@ public class UserAccount {
                 ", isActive=" + isActive +
                 ", createdAt=" + createdAt +
                 '}';
+    }
+
+    public UserType UserType() {
+        if (this.isActive) {
+            return UserType.ADMIN;
+        } else {
+            return UserType.CUSTOMER;
+        }
+    }
+
+
+    public String getFirstName() {
+        return username.split("@")[0];
+    }
+
+    public String getLastName() {
+        return username.split("@")[1];
     }
 }

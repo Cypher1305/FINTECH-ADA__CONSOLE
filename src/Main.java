@@ -13,7 +13,13 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("=== Système de Gestion des Comptes Utilisateurs ===");
+        System.out.println(""" 
+                 ______   _   _     _   _________   ______    _______    _     _                ___       _________         ___
+                |  ____| | | | \\  | | |_________| |  ____|  /  _____|  | |   | |              |   |     |  _____  \\      |   |
+                | |___   | | |  \\ | |     | |     | |____   | |        | |___| |             |     |    | |      \\|     |     |
+                |  ___|  | | |   `  |     | |     |  ____|  | |        |  ___| |            | |___| |   | |      | |    | |___| |
+                | |      | | | |\\   |     | |     | |____   | |______  | |   | |  ______  | |     | |  | |_____/  |   | |     | |
+                |_|      |_| |_| \\ _|     |_|     |______|   \\______| |_|   |_| |______| |_|       | | |_________/   |_|       |_|   """);
 
         try {
             // Test de connexion à la base de données
