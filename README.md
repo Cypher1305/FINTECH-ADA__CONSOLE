@@ -10,6 +10,7 @@
 -  Wallet and transaction operations
 -  Authentication & User Roles
   
+-  Layered architecture (DAO, Service, Model)  
 -  Design Patterns used:
       - **State**: to manage user session states
       - **Strategy**: to generate user matricules based on type
@@ -17,7 +18,6 @@
       - **Singleton**: for database connection
       - **Chain of Responsibility**: for request validation flow
 -  MySQL database integration (via JDBC)
--  Layered architecture (DAO, Service, Model)
 
 ---
 
