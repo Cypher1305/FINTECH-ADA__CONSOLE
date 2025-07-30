@@ -4,7 +4,7 @@ import database.DatabaseConnection;
 import enums.UserType;
 import models.Admin;
 import models.UserAccount;
-import utils.Utils;
+import utils.GenerateMatricule;
 
 import java.sql.*;
 import java.util.*;
@@ -37,7 +37,7 @@ public class AdminDao { ;
                 pstmt.setString(4, admin.getPhoneNumber());
                 pstmt.setInt(5, admin.getUserAccount().getId());
                 pstmt.setString(6, UserType.ADMIN.name());
-                pstmt.setString(7, Utils.generateMatricule(admin.getFirstname(), admin.getLastname()));
+                pstmt.setString(7, GenerateMatricule.generateMatricule(admin.getFirstname(), admin.getLastname()));
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {

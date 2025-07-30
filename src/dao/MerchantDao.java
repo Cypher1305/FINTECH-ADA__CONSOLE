@@ -5,6 +5,8 @@ import database.DatabaseConnection;
 import enums.UserType;
 import models.Merchant;
 import models.UserAccount;
+import utils.GenerateMatricule;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class MerchantDao {
             }
 
             // 2. Créer l'utilisateur
-            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type, matricule) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = connection.prepareStatement(userSql, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, merchant.getFirstname());
                 pstmt.setString(2, merchant.getLastname());
@@ -38,6 +40,7 @@ public class MerchantDao {
                 pstmt.setString(4, merchant.getPhoneNumber());
                 pstmt.setInt(5, merchant.getUserAccount().getId());
                 pstmt.setString(6, UserType.MERCHANT.name());
+                pstmt.setString(7, GenerateMatricule.generateMatricule(merchant.getFirstname(), merchant.getLastname()));
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {

@@ -1,19 +1,16 @@
 package services;
 
-import dao.AdminDao;
-import dao.CustomerDao;
-import dao.MerchantDao;
-import dao.UserAccountDao;
-import models.Admin;
-import models.Customer;
-import models.Merchant;
-import models.UserAccount;
+import dao.*;
+import models.*;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
+    private List<UserAccount> users = new ArrayList<>();
     private MerchantDao merchantDao;
     private CustomerDao customerDao;
 
@@ -50,6 +47,16 @@ public class UserService {
 
 
     // Méthodes pour les clients
+
+    // Login
+    public UserAccount login(String username, String password) {
+        Optional<UserAccount> account = userAccountDao.findByUsername(username);
+        if (account.isPresent() && verifyPassword(password, account.get().getPassword())) {
+            return account.get();
+        }
+        return null;
+    }
+
     public boolean createCustomer(Customer customer) {
         customer.getUserAccount().setPassword(hashPassword(customer.getUserAccount().getPassword()));
         return customerDao.create(customer);
@@ -102,6 +109,11 @@ public class UserService {
     public boolean deleteAdmin(int id) {
         return adminDao.delete(id);
     }
+
+    public List<UserAccount> displayAllUsers() {
+        return userAccountDao.findAll();
+    }
+
 
     // Utilitaires de sécurité
     private String hashPassword(String password) {

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app-console.iml" filepath="$PROJECT_DIR$/app-console.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fintech_ada.iml" filepath="$PROJECT_DIR$/fintech_ada.iml" />
     </modules>
   </component>
 </project>
