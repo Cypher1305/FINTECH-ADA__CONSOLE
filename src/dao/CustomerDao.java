@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import utils.GenerateMatricule;
 
 public class CustomerDao {
     private Connection connection;
@@ -30,7 +31,7 @@ public class CustomerDao {
             }
 
             // 2. Créer l'utilisateur
-            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type) VALUES (?, ?, ?, ?, ?, ?)";
+            String userSql = "INSERT INTO users (firstname, lastname, email, phone_number, user_account_id, user_type, matricule) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = connection.prepareStatement(userSql, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, customer.getFirstname());
                 pstmt.setString(2, customer.getLastname());
@@ -38,6 +39,7 @@ public class CustomerDao {
                 pstmt.setString(4, customer.getPhoneNumber());
                 pstmt.setInt(5, customer.getUserAccount().getId());
                 pstmt.setString(6, UserType.CUSTOMER.name());
+                pstmt.setString(7, GenerateMatricule.generateMatricule(customer.getFirstname(), customer.getLastname()));
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {
