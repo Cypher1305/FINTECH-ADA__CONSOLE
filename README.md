@@ -13,10 +13,10 @@
 -  Layered architecture (DAO, Service, Model)  
 -  Design Patterns used:
       - **State**: to manage user session states
+      - **Singleton**: for database connection
       - **Strategy**: to generate user matricules based on type
       - **Factory**: to create users based on roles
-      - **Singleton**: for database connection
-      - **Chain of Responsibility**: for request validation flow
+      - **Adaptor**: for request validation flow
 -  MySQL database integration (via JDBC)
 
 ---
