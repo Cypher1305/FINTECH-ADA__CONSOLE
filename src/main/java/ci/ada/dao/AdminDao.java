@@ -1,11 +1,14 @@
 package ci.ada.dao;
 
 
+import ci.ada.Interfaces.MatriculeStrategy;
 import ci.ada.database.DatabaseConnection;
 import ci.ada.enums.UserType;
 import ci.ada.models.Admin;
 import ci.ada.models.UserAccount;
-import ci.ada.utils.GenerateMatricule;
+import ci.ada.utils.MatriculeGeneratorContext;
+import ci.ada.utils.MatriculeUtil;
+import ci.ada.utils.strategy.AdminMatriculeStrategy;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +43,11 @@ public class AdminDao { ;
                 pstmt.setString(4, admin.getPhoneNumber());
                 pstmt.setLong(5, admin.getUserAccount().getId());
                 pstmt.setString(6, UserType.ADMIN.name());
-                pstmt.setString(7, GenerateMatricule.generateMatricule(admin.getFirstname(), admin.getLastname()));
+
+                MatriculeGeneratorContext context = new MatriculeGeneratorContext();
+                context.setStrategy(new AdminMatriculeStrategy());
+                String matricule = context.generate(admin.getFirstname(), admin.getLastname());
+                pstmt.setString(7, matricule);
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {

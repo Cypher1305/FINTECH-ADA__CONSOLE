@@ -1,11 +1,16 @@
 package ci.ada.dao;
 
 
+import ci.ada.Interfaces.MatriculeStrategy;
 import ci.ada.database.DatabaseConnection;
 import ci.ada.enums.UserType;
 import ci.ada.models.Merchant;
 import ci.ada.models.UserAccount;
-import ci.ada.utils.GenerateMatricule;
+import ci.ada.utils.MatriculeGeneratorContext;
+import ci.ada.utils.MatriculeUtil;
+import ci.ada.utils.strategy.AdminMatriculeStrategy;
+import ci.ada.utils.strategy.CustomerMatriculeStrategy;
+import ci.ada.utils.strategy.MerchantMatriculeStrategy;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +45,11 @@ public class MerchantDao {
                 pstmt.setString(4, merchant.getPhoneNumber());
                 pstmt.setLong(5, merchant.getUserAccount().getId());
                 pstmt.setString(6, UserType.MERCHANT.name());
-                pstmt.setString(7, GenerateMatricule.generateMatricule(merchant.getFirstname(), merchant.getLastname()));
+
+                MatriculeGeneratorContext context = new MatriculeGeneratorContext();
+                context.setStrategy(new MerchantMatriculeStrategy());
+                String matricule = context.generate(merchant.getFirstname(), merchant.getLastname());
+                pstmt.setString(7, matricule);
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {

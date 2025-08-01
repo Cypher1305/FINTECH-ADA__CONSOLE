@@ -1,11 +1,15 @@
 package ci.ada.dao;
 
 
+import ci.ada.Interfaces.MatriculeStrategy;
 import ci.ada.database.DatabaseConnection;
 import ci.ada.enums.UserType;
 import ci.ada.models.Customer;
 import ci.ada.models.UserAccount;
-import ci.ada.utils.GenerateMatricule;
+import ci.ada.utils.MatriculeGeneratorContext;
+import ci.ada.utils.MatriculeUtil;
+import ci.ada.utils.strategy.AdminMatriculeStrategy;
+import ci.ada.utils.strategy.CustomerMatriculeStrategy;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -40,7 +44,11 @@ public class CustomerDao {
                 pstmt.setString(4, customer.getPhoneNumber());
                 pstmt.setLong(5, customer.getUserAccount().getId());
                 pstmt.setString(6, UserType.CUSTOMER.name());
-                pstmt.setString(7, GenerateMatricule.generateMatricule(customer.getFirstname(), customer.getLastname()));
+
+                MatriculeGeneratorContext context = new MatriculeGeneratorContext();
+                context.setStrategy(new CustomerMatriculeStrategy());
+                String matricule = context.generate(customer.getFirstname(), customer.getLastname());
+                pstmt.setString(7, matricule);
 
                 int affectedRows = pstmt.executeUpdate();
                 if (affectedRows > 0) {
