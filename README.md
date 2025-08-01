@@ -12,11 +12,11 @@
   
 -  Layered architecture (DAO, Service, Model)  
 -  Design Patterns used:
-      - **State**: to manage user session states
-      - **Singleton**: for database connection
-      - **Strategy**: to generate user matricules based on type
-      - **Factory**: to create users based on roles
-      - **Adaptor**: for request validation flow
+      - **Singleton**: to ensure a single instance of the database connection throughout the application, avoiding multiple unnecessary connections.
+      - **State**: to manage user session behavior depending on their states.
+      - **Facade**: to provide a simplified interface to coordinate multiple services so the main application logic remains clean and easy to use.
+      - **Strategy**: to implements dynamic generation of user matricules based on user types. Makes it easy to extend matricule logic for new user roles.
+      - **Adaptor**: to allow the system to register users (especially customers) from external spreadsheet files by converting spreadsheet data formats into the application's internal Customer objects.
 -  MySQL database integration (via JDBC)
 
 ---
